@@ -15,6 +15,16 @@ app.use(BodyParser());
 app.use(Logger());
 app.use(cors());
 
+const router = new Router();
+
+router.get("/budget",async (ctx,next)=>{
+  const budget = ["Rent", "Power", "Gas"];
+  ctx.status = HttpStatus.OK;
+  ctx.body = budget;
+  await next();
+});
+
+app.use(router.routes()).use(router.allowedMethods());
 app.listen(PORT, function () {
     console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/", PORT, PORT);
 });
